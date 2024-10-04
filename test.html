@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuenta Regresiva Furparty</title>
+</head>
+<body>
+    <p>Faltan <span class="countdown">X</span> para la Furparty!</p>
+
+    <script>
+        // Fecha de la Furparty (19 de octubre a las 21:30 hs)
+        const eventDate = new Date('2024-10-19T21:30:00');  // Cambié la fecha aquí
+
+        function updateCountdown() {
+            const now = new Date();
+            const timeDifference = eventDate - now;
+
+            if (timeDifference <= 0) {
+                document.querySelector('.countdown').textContent = "¡Es hora de la Furparty!";
+                clearInterval(countdownInterval);
+            } else {
+                const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+
+                // Formatear el texto para evitar plurales
+                let daysText = days === 1 ? `${days} día` : `${days} días`;
+                let hoursText = hours === 1 ? `${hours} hora` : `${hours} horas`;
+                let minutesText = minutes === 1 ? `${minutes} minuto` : `${minutes} minutos`;
+
+                // Mostrar el contador
+                document.querySelector('.countdown').textContent = `${daysText}, ${hoursText}, ${minutesText}`;
+            }
+        }
+
+        // Actualizar el contador cada segundo
+        const countdownInterval = setInterval(updateCountdown, 1000);
+
+        // Inicializa el contador inmediatamente
+        updateCountdown();
+    </script>
+</body>
+</html>
